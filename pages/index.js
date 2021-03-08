@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Create Next App</title>
+        <title>WebDev</title>
         <link rel='icon' href='/favicon.ico' />
         <meta name='keywords' content='web development' />
       </Head>
