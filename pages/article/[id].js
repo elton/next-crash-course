@@ -9,6 +9,7 @@ const article = ({ article }) => {
   );
 };
 
+// This function gets called at build time
 export const getStaticProps = async (context) => {
   const res = await fetch(
     `https://jsonplaceholder.typicode.com/posts/${context.params.id}`
@@ -22,11 +23,16 @@ export const getStaticProps = async (context) => {
   };
 };
 
+// This function gets called at build time
 export const getStaticPaths = async () => {
   const res = await fetch(`https://jsonplaceholder.typicode.com/posts`);
   const articles = await res.json();
-  const ids = articles.map((article) => article.id);
-  const paths = ids.map((id) => ({ params: { id: id.toString() } }));
+
+  // Get the paths we want to pre-render based on posts
+  // const ids = articles.map((article) => article.id);
+  // const paths = ids.map((id) => ({ params: { id: id.toString() } }));
+
+  const paths = articles.map((article) => `/article/${article.id}`);
 
   return {
     paths,

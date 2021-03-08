@@ -15,6 +15,7 @@ export default function Home({ articles }) {
   );
 }
 
+// This function gets called at build time
 export const getStaticProps = async () => {
   const res = await fetch(
     'https://jsonplaceholder.typicode.com/posts?_limit=6'
