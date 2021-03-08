@@ -10,9 +10,9 @@ const article = ({ article }) => {
 };
 
 // This function gets called at build time
-export const getStaticProps = async (context) => {
+export const getStaticProps = async ({ params }) => {
   const res = await fetch(
-    `https://jsonplaceholder.typicode.com/posts/${context.params.id}`
+    `https://jsonplaceholder.typicode.com/posts/${params.id}`
   );
   const article = await res.json();
 
@@ -34,6 +34,7 @@ export const getStaticPaths = async () => {
 
   const paths = articles.map((article) => `/article/${article.id}`);
 
+  // { fallback: false } means other routes should 404.
   return {
     paths,
     fallback: false,
