@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+
 const article = ({ article }) => {
   return (
     <div className='max-w-3xl'>
@@ -7,20 +9,6 @@ const article = ({ article }) => {
       <Link href='/'>Go Back</Link>
     </div>
   );
-};
-
-// This function gets called at build time
-export const getStaticProps = async ({ params }) => {
-  const res = await fetch(
-    `https://jsonplaceholder.typicode.com/posts/${params.id}`
-  );
-  const article = await res.json();
-
-  return {
-    props: {
-      article,
-    },
-  };
 };
 
 // This function gets called at build time
@@ -37,7 +25,26 @@ export const getStaticPaths = async () => {
   // { fallback: false } means other routes should 404.
   return {
     paths,
-    fallback: false,
+    // Enable statically generating additional pages
+    // For example: `/article/3`
+    fallback: true,
+  };
+};
+
+// This function gets called at build time
+export const getStaticProps = async ({ params }) => {
+  const res = await fetch(
+    `https://jsonplaceholder.typicode.com/posts/${params.id}`
+  );
+  const article = await res.json();
+
+  return {
+    props: {
+      article,
+    },
+    // Re-generate the post at most once per second
+    // if a request comes in
+    revalidate: 1,
   };
 };
 
