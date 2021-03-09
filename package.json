@@ -1,7 +1,11 @@
 {
   "name": "next-crash-course",
+  "homepage": "blog.prosight.me",
+  "description": "A demo of NextJS with tailwindcss.",
   "version": "0.1.0",
+  "repository": "https://github.com/elton/next-crash-course",
   "private": true,
+  "license": "MIT",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -11,6 +15,9 @@
     "next": "10.0.8",
     "react": "17.0.1",
     "react-dom": "17.0.1"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
   },
   "devDependencies": {
     "autoprefixer": "^10.2.5",
